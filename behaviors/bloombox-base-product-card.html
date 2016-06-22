@@ -230,6 +230,17 @@
     },
 
     /**
+     * Render function that prepares a simple label, should a brand be specified for
+     * a product, or an empty string if not.
+     */
+    _renderBrand: function() {
+      var brand = this.get("brand");
+      if (brand)
+        return brand + ": ";
+      return "";
+    },
+
+    /**
      * Render function that indicates whether the current item is on sale.
      */
     _isOnSale: function() {
