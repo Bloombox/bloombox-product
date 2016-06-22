@@ -135,6 +135,18 @@
       },
 
       /**
+       * String value of the `grow` type of this current item, if known. Valid options:
+       * - `Indoor`
+       * - `Outdoor`
+       * - `Greenhouse`
+       */
+      grow: {
+        type: String,
+        notify: true,
+        reflectToAttribute: true
+      },
+
+      /**
        * Value specifying the amount that this product is currently on-sale, if any. No value
        * or a value of `0` is interpreted to mean "not on sale."
        */
