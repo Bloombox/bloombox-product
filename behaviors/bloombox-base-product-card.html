@@ -121,6 +121,20 @@
       },
 
       /**
+       * String value of the `species` of this current item, if known. Valid options:
+       * - `Indica`
+       * - `Hybrid (Indica Dominant)`
+       * - `Hybrid (No Dominance)`
+       * - `Hybrid (Sativa Dominant)`
+       * - `Sativa`
+       */
+      species: {
+        type: String,
+        notify: true,
+        reflectToAttribute: true
+      },
+
+      /**
        * Value specifying the amount that this product is currently on-sale, if any. No value
        * or a value of `0` is interpreted to mean "not on sale."
        */
