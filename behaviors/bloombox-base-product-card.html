@@ -293,6 +293,26 @@
     },
 
     /**
+     * Handles events from subcomponents that indicate a new image asset has been
+     * attached to the current object.
+     */
+    handleAssetAttach: function(event) {
+      var that = this;
+      console.log("Attaching asset:", event);
+      bloom.app.attachAsset(event.target, function (uuid, error) {
+        // handle edit success/fail
+        if (error) {
+          console.error("Failed to upload media for item: ", this, error);
+          alert('Failed to attach image.');
+        } else {
+          console.log("Media item uploaded successfully.", uuid);
+          that.set("photos", [uuid]);
+          event.target.adoptNewAsset();
+        }
+      });
+    },
+
+    /**
      * Commit current edits to this object. Used from `zerostate` mode to persist
      * changes upwards to the active application.
      */
@@ -347,6 +367,6 @@
       console.log("Editing item...", this);
       this.set("editing", true);
       this.set("zerostate", true);
-    },
+    }
   };
 </script>
