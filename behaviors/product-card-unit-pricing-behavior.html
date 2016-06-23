@@ -1,0 +1,31 @@
+
+<script>
+  /**
+   * `Polymer.BloomboxUnitPricingProductCardBehavior` extends the base shared logic
+   * for product cards with specific support for products with unit-based pricing.
+   *
+   * @demo demo/index.html
+   * @polymerBehavior
+   */
+  var BloomboxUnitPricingProductCardBehavior, BloomboxUnitPricingProductCardBehaviorImpl = {
+    properties: {
+      /**
+       * Object specifying product pricing. This is specified in either weighted pricing (i.e.
+       * pricing per-gram or per-ounce), which is generally used for raw product, namely
+       * flowers and concentrates.
+       */
+      pricing: {
+        type: Object,
+        notify: true,
+        reflectToAttribute: true,
+        value: function() {
+          return {"unit": {"available": true, "value": 0}};
+        }
+      }
+    }
+  };
+
+  Polymer.BloomboxUnitPricingProductCardBehavior = BloomboxUnitPricingProductCardBehavior = [
+    BloomboxBaseProductCardBehavior, BloomboxUnitPricingProductCardBehaviorImpl
+  ];
+</script>
