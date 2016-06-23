@@ -319,9 +319,10 @@
     commitEdits: function(callback) {
       var previous = this.readObjectData(),
           serialized = this.readZeroStateForm()
-          that = this;
-      console.log("Committing edits...", previous, serialized);
-      bloom.app.saveEditsForEntry("apothecary", this.get("key"), previous, serialized, function (error) {
+          that = this,
+          schema = this._schema;
+      console.log("Committing edits...", schema, previous, serialized);
+      bloom.app.saveEditsForEntry(schema, this.get("key"), previous, serialized, function (error) {
         // handle edit success/fail
         if (error) {
           console.error("Failed to save edits for item: ", this, error);
@@ -349,15 +350,19 @@
      * Save the current `zerostate` dataset as a new entry in underlying persistence.
      */
     persist: function() {
-        bloom.app.saveNewObject("apothecary", this.readZeroStateForm());  // read the form into our object
+      var schema = this._schema,
+          serialized = this.readZeroStateForm();
+      console.log("Saving new item...", schema, serialized);
+      bloom.app.saveNewObject(schema, serialized);  // read the form into our object
     },
 
     /**
      * Delete the current item from underlying persistence.
      */
     delete: function() {
-      console.log("Deleting item...", this);
-      bloom.app.deleteEntryAtId("apothecary", this.get("key"));
+      var schema = this._schema;
+      console.log("Deleting item...", schema, this);
+      bloom.app.deleteEntryAtId(schema, this.get("key"));
     },
 
     /**
