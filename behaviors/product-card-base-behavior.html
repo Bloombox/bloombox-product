@@ -141,7 +141,10 @@
       species: {
         type: String,
         notify: true,
-        reflectToAttribute: true
+        reflectToAttribute: true,
+        value: function() {
+          return null;
+        }
       },
 
       /**
@@ -153,7 +156,10 @@
       grow: {
         type: String,
         notify: true,
-        reflectToAttribute: true
+        reflectToAttribute: true,
+        value: function() {
+          return null;
+        }
       },
 
       /**
@@ -163,7 +169,8 @@
       sale: {
         type: Number,
         notify: true,
-        reflectToAttribute: true
+        reflectToAttribute: true,
+        value: 0
       },
 
       /**
@@ -194,7 +201,8 @@
       premium: {
         type: Boolean,
         notify: true,
-        reflectToAttribute: true
+        reflectToAttribute: true,
+        value: false
       },
 
       /**
