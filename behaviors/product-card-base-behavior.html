@@ -315,7 +315,8 @@
      * Discard the current `zerostate`/uncommitted new item.
      */
     _triggerDiscard: function() {
-      bloom.app.toggleAddEntry();
+      var schema = this._schema;
+      bloom.menu.toggleAddEntry(schema);
     },
 
     /**
@@ -325,7 +326,7 @@
     handleAssetAttach: function(event) {
       var that = this;
       console.log("Attaching asset:", event);
-      bloom.app.attachAsset(event.target, function (uuid, error) {
+      bloom.menu.attachAsset(event.target, function (uuid, error) {
         // handle edit success/fail
         if (error) {
           console.error("Failed to upload media for item: ", this, error);
@@ -348,7 +349,7 @@
           that = this,
           schema = this._schema;
       console.log("Committing edits...", schema, previous, serialized);
-      bloom.app.saveEditsForEntry(schema, this.get("key"), previous, serialized, function (error) {
+      bloom.menu.saveEditsForEntry(schema, this.get("key"), previous, serialized, function (error) {
         // handle edit success/fail
         if (error) {
           console.error("Failed to save edits for item: ", this, error);
@@ -379,7 +380,7 @@
       var schema = this._schema,
           serialized = this.readZeroStateForm();
       console.log("Saving new item...", schema, serialized);
-      bloom.app.saveNewObject(schema, serialized);  // read the form into our object
+      bloom.menu.saveNewObject(schema, serialized);  // read the form into our object
     },
 
     /**
@@ -388,7 +389,7 @@
     delete: function() {
       var schema = this._schema;
       console.log("Deleting item...", schema, this);
-      bloom.app.deleteEntryAtId(schema, this.get("key"));
+      bloom.menu.deleteEntryAtId(schema, this.get("key"));
     },
 
     /**
