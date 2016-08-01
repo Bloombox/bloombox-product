@@ -126,7 +126,14 @@
       tests: {
         type: Object,
         notify: true,
-        reflectToAttribute: true
+        reflectToAttribute: true,
+        value: function() {
+          return {
+            thc: 0.0,
+            cbd: 0.0,
+            terpenes: {}
+          }
+        }
       },
 
       /**
