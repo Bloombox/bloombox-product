@@ -131,7 +131,7 @@
           return {
             thc: 0.0,
             cbd: 0.0,
-            terpenes: {}
+            terpenes: defaultTerpeneConfig()
           }
         }
       },
@@ -407,4 +407,93 @@
       this.set("zerostate", true);
     }
   };
+
+  var defaultTerpeneConfig = Polymer.DefaultTerpeneConfig = (function () {
+      return {
+        myrcene: {
+          presence: false,
+          rating: 0.0
+        },
+
+        caryophylleneOxide: {
+          presence: false,
+          rating: 0.0
+        },
+
+        linalool: {
+          presence: false,
+          rating: 0.0
+        },
+
+        betaCaryophyllene: {
+          presence: false,
+          rating: 0.0
+        },
+
+        alphaHumulene: {
+          presence: false,
+          rating: 0.0
+        },
+
+        alphaTerpineol: {
+          presence: false,
+          rating: 0.0
+        },
+
+        camphene: {
+          presence: false,
+          rating: 0.0
+        },
+
+        fenchol: {
+          presence: false,
+          rating: 0.0
+        },
+
+        alphaPinene: {
+          presence: false,
+          rating: 0.0
+        },
+
+        betaPinene: {
+          presence: false,
+          rating: 0.0
+        },
+
+        alphaTerpinine: {
+          presence: false,
+          rating: 0.0
+        },
+
+        gammaTerpinine: {
+          presence: false,
+          rating: 0.0
+        },
+
+        limonene: {
+          presence: false,
+          rating: 0.0
+        },
+
+        carene: {
+          presence: false,
+          rating: 0.0
+        },
+
+        betaOcimene: {
+          presence: false,
+          rating: 0.0
+        },
+
+        alphaPhellandrene: {
+          presence: false,
+          rating: 0.0
+        },
+
+        terpinolene: {
+          presence: false,
+          rating: 0.0
+        }
+      }
+    });
 </script>
