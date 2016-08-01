@@ -386,7 +386,7 @@
       var schema = this._schema,
           serialized = this.readZeroStateForm();
       console.log("Saving new item...", schema, serialized);
-      bloom.menu.saveNewObject(schema, serialized);  // read the form into our object
+      bloom.menu.saveNewObject(schema, serialized, this);  // read the form into our object
     },
 
     /**
