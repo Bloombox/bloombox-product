@@ -21,27 +21,6 @@
       },
 
       /**
-       * Computes whether we are operating in `slim` display mode.
-       */
-      _slim: {
-        type: Boolean,
-        notify: true,
-        computed: '_computeSlimMode(displayMode)'
-      },
-
-      /**
-       * Display mode for the widget. Supported modes are `normal` and `slim`:
-       * - `normal`: Displays all available/specified widget data
-       * - `slim`: Omits description and product image
-       */
-      displayMode: {
-        type: String,
-        value: 'normal',
-        notify: true,
-        reflectToAttribute: true
-      },
-
-      /**
        * Flag indicating that we are in a mode that demands a form to edit the data backing
        * this widget. Combined with `editing`, this means we are either creating
        * (`editing=false`) or editing an existing item.
@@ -127,13 +106,7 @@
         type: Object,
         notify: true,
         reflectToAttribute: true,
-        value: function() {
-          return {
-            thc: 0.0,
-            cbd: 0.0,
-            terpenes: defaultTerpeneConfig()
-          }
-        }
+        value: null
       },
 
       /**
@@ -148,9 +121,7 @@
         type: String,
         notify: true,
         reflectToAttribute: true,
-        value: function() {
-          return null;
-        }
+        value: null
       },
 
       /**
@@ -163,9 +134,7 @@
         type: String,
         notify: true,
         reflectToAttribute: true,
-        value: function() {
-          return null;
-        }
+        value: null
       },
 
       /**
@@ -238,28 +207,6 @@
       if (Array.isArray(photos) && photos.length > 0)
         return photos[0];
       return null;
-    },
-
-    /**
-     * Computation function that returns whether we are currently in `slim` display mode.
-     */
-    _computeSlimMode: function(displayMode) {
-        return displayMode == "slim";
-    },
-
-    /**
-     * Render function that decides whether we should hide our `<bloombox-media>` element.
-     * We usually decide to hide it when:
-     * - The component is being viewed in `slim` mode
-     * - There is no image and we are not in `zerostate` mode
-     */
-    _shouldHideImage: function() {
-      // we should hide the image if:
-      // 1) we are in slimline mode
-      // 2) there is no image and we are in zero-state
-      var image = this.get("_image"),
-          slim = this.get("_slim");
-      return (slim || !image);
     },
 
     /**
@@ -354,7 +301,7 @@
           serialized = this.readZeroStateForm()
           that = this,
           schema = this._schema;
-      console.log("Committing edits...", schema, previous, serialized);
+      console.log("Committing edits for object...", schema, previous, serialized);
       bloom.menu.saveEditsForEntry(schema, this.get("key"), previous, serialized, function (error) {
         // handle edit success/fail
         if (error) {
