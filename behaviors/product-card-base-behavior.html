@@ -210,6 +210,19 @@
     },
 
     /**
+     * Small utility function for converting an object and its keys into an array
+     * of `{key: k, value: v}` objects, suitable for iteration.
+     */
+    _toArray: function(obj) {
+      return Object.keys(obj).map(function(key) {
+        return {
+          key: key,
+          value: obj[key]
+        };
+      });
+    },
+
+    /**
      * Render function that returns the label text that should be used for "Top Shelf".
      * For everyone but Abatin Wellness, this is "Top Shelf." For them, it is "MPMH,"
      * which stands for *Minimally Processed, Minimally Handled*.
