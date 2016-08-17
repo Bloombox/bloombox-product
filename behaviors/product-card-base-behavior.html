@@ -367,6 +367,36 @@
       console.log("Editing item...", this);
       this.set("editing", true);
       this.set("zerostate", true);
+    },
+
+    /**
+     * Mark the current product as in-stock, adding it back to the menu if it was previously
+     * invisible.
+     */
+    markAsInStock: function(callback) {
+      var visible = this.visible;
+      if (!visible) {
+        console.log("Marking object as in-stock...", this);
+        bloom.menu.markAsInStock(this);
+      } else {
+        console.warn("User requested to mark item as in-stock but it already is in-stock: ", this);
+        bloom.app.errorToast("That product is already marked as in-stock.");
+      }
+    },
+
+    /**
+     * Mark the current product as out-of-stock, thereby removing it from the menu.
+     */
+    markAsOutOfStock: function(callback) {
+      var visible = this.visible;
+      if (visible) {
+        obj = this.readObjectData();
+        console.log("Marking object as out-of-stock...", this);
+        bloom.menu.markAsOutOfStock(this);
+      } else {
+        console.warn("User requested to mark item as out-of-stock but it already is out-of-stock: ", this);
+        bloom.app.errorToast("That product is already marked as out-of-stock.");
+      }
     }
   };
 
