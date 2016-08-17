@@ -353,9 +353,11 @@
      * Delete the current item from underlying persistence.
      */
     delete: function() {
-      var schema = this._schema;
-      console.log("Deleting item...", schema, this);
-      bloom.menu.deleteEntryAtId(schema, this.get("key"));
+      var schema = this._schema,
+          key = this.get("key"),
+          name = this.get("name");
+      console.log("Deleting item...", schema, this, key, name);
+      bloom.menu.deleteEntryAtId(schema, key, name);
     },
 
     /**
