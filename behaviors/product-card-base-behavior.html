@@ -21,6 +21,15 @@
       },
 
       /**
+       * Computes whether we should be showing sale selection UI.
+       */
+      _isOnSale: {
+        type: Boolean,
+        notify: true,
+        computed: '_computeIsOnSale(sale)'
+      },
+
+      /**
        * Flag indicating that we are in a mode that demands a form to edit the data backing
        * this widget. Combined with `editing`, this means we are either creating
        * (`editing=false`) or editing an existing item.
@@ -247,8 +256,8 @@
     /**
      * Render function that indicates whether the current item is on sale.
      */
-    _isOnSale: function() {
-      return this.sale !== undefined && this.sale > 0;
+    _computeIsOnSale: function(sale) {
+      return sale !== undefined && sale !== null && sale > 0;
     },
 
     /**
