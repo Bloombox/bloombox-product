@@ -295,6 +295,31 @@
     },
 
     /**
+     * Perform field validation when in zerostate. Callbacks for `success` and `error`
+     * states need to be provided.
+     */
+    validate: function(success, error) {
+      var fields = Polymer.dom(this.root).querySelectorAll("[required]"), i, f, didError = false;
+      if (Array.isArray(fields) && fields.length > 0) {
+        for (i in fields) {
+          f = fields[i];
+          if (!f.validate()) {
+            console.warn("Field failed to validate: " + f.name, f);
+            didError = true;
+            if (f.focus !== undefined && typeof f.focus === "function")
+              f.focus();
+            break;
+          }
+        }
+      }
+      if (!didError) {
+        success();
+      } else {
+        error(f);
+      }
+    },
+
+    /**
      * Handles events from subcomponents that indicate a new image asset has been
      * attached to the current object.
      */
@@ -322,20 +347,32 @@
       var previous = this.readObjectData(),
           serialized = this.readZeroStateForm()
           that = this,
-          schema = this._schema;
-      console.log("Committing edits for object...", schema, previous, serialized);
-      bloom.menu.saveEditsForEntry(schema, this.get("key"), previous, serialized, function (error) {
-        // handle edit success/fail
-        if (error) {
-          console.error("Failed to save edits for item: ", this, error);
-          alert('Failed to apply edits.');
-        } else {
-          console.log("Edits applied successfully.");
-          if (callback !== undefined && typeof callback === "function")
-            callback();
-          that.set("editing", false);
-          that.set("zerostate", false);
-        }
+          key = this.get("key"),
+          schema = this._schema,
+          bound = (callback !== undefined && typeof callback === "function") ? callback.bind(this) : undefined;
+      this.validate(function() {
+        console.log("Committing edits for object...", schema, previous, serialized);
+        bloom.menu.saveEditsForEntry(schema, key, previous, serialized, function (error) {
+          // handle edit success/fail
+          if (error) {
+            console.error("Failed to save edits for item: ", this, error);
+            if (bound != undefined && typeof bound === "function")
+              bound(error);
+          } else {
+            console.log("Edits applied successfully.");
+            if (bound !== undefined && typeof bound === "function")
+              bound();
+            that.set("editing", false);
+            that.set("zerostate", false);
+          }
+        });
+      }, function(error) {
+          console.warn("Object failed to validate. Refusing save...");
+          if (bound !== undefined && typeof bound === "function") {
+            bound(error);
+          } else {
+            bloom.app.warningToast("Please fill in required fields.");
+          }
       });
     },
 
@@ -351,11 +388,15 @@
     /**
      * Save the current `zerostate` dataset as a new entry in underlying persistence.
      */
-    persist: function() {
-      var schema = this._schema,
-          serialized = this.readZeroStateForm();
-      console.log("Saving new item...", schema, serialized);
-      bloom.menu.saveNewObject(schema, serialized, this);  // read the form into our object
+    persist: function(callback) {
+      var that = this,
+          schema = this._schema,
+          serialized = this.readZeroStateForm(),
+          bound = (callback !== undefined && typeof callback === "function") ? callback.bind(this) : undefined;
+      this.validate(function() {
+        console.info("Saving new item...", schema, serialized);
+        bloom.menu.saveNewObject(schema, serialized, that, bound);  // read the form into our object
+      }, bound);
     },
 
     /**
