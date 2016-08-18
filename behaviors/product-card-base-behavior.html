@@ -30,6 +30,26 @@
       },
 
       /**
+       * Computes the class to be used for the description row, depending on whether a
+       * piece of summary text is available or not.
+       */
+      _descriptionClass: {
+        type: String,
+        notify: true,
+        computed: '_computeDescriptionClass(description)'
+      },
+
+      /**
+       * Computes the text to be shown for a product's description. Provides default
+       * text in the case that summary text is not available.
+       */
+      _descriptionText: {
+        type: String,
+        notify: true,
+        computed: '_computeDescriptionText(description)'
+      },
+
+      /**
        * Flag indicating that we are in a mode that demands a form to edit the data backing
        * this widget. Combined with `editing`, this means we are either creating
        * (`editing=false`) or editing an existing item.
@@ -216,6 +236,26 @@
       if (Array.isArray(photos) && photos.length > 0)
         return photos[0];
       return null;
+    },
+
+    /**
+     * Computes class/classes to be set on a products description row.
+     */
+    _computeDescriptionClass: function(description) {
+      if (typeof description === "string" && description.length > 0) {
+        return "product-description";
+      }
+      return "no-description";
+    },
+
+    /**
+     * Computes text to be shown for a product's description.
+     */
+    _computeDescriptionText: function(description) {
+      if (typeof description === "string" && description.length > 0) {
+        return description;
+      }
+      return "(No description)";
     },
 
     /**
