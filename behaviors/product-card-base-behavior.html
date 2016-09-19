@@ -339,16 +339,17 @@
      * states need to be provided.
      */
     validate: function(success, error) {
-      var fields = Polymer.dom(this.root).querySelectorAll("[required]"), i, f, didError = false;
+      var fields = Polymer.dom(this.root).querySelectorAll("[required]"), i, f, didError = false, didFocus = false;
       if (Array.isArray(fields) && fields.length > 0) {
         for (i in fields) {
           f = fields[i];
           if (!f.validate()) {
             console.warn("Field failed to validate: " + f.name, f);
             didError = true;
-            if (f.focus !== undefined && typeof f.focus === "function")
+            if (!didFocus && (f.focus !== undefined && typeof f.focus === "function")) {
               f.focus();
-            break;
+              didFocus = true;
+            }
           }
         }
       }
