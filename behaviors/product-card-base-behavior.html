@@ -417,6 +417,19 @@
       });
     },
 
+    /**
+     * Force-focus the first field in a zerostate form.
+     */
+    focusFirstField: function() {
+      var field = Polymer.dom(this.shadowRoot).querySelector("paper-input");
+      this.async(function() {
+        setTimeout(function() {
+          field.focus();
+          field.$.input.focus();
+        }, 200);
+      });
+    },
+
     /** 
      * Cancel staged edits and revert out of editing UI.
      */
