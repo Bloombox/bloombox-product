@@ -357,11 +357,11 @@
     handleAssetAttach: function(event) {
       var that = this;
       console.log("Attaching asset:", event);
-      bloom.menu.attachAsset(event.target, function (uuid, error) {
+      bloom.menu.attachAsset(event.detail, function (uuid, error) {
         // handle edit success/fail
         if (error) {
-          console.error("Failed to upload media for item: ", this, error);
-          alert('Failed to attach image.');
+          console.error("Failed to upload media for item:", this, error);
+          alert("Failed to attach image.");
         } else {
           console.log("Media item uploaded successfully.", uuid);
           that.set("photos", [uuid]);
