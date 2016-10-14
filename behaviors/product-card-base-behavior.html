@@ -242,9 +242,8 @@
      * Computes class/classes to be set on a products description row.
      */
     _computeDescriptionClass: function(description) {
-      if (typeof description === "string" && description.length > 0) {
+      if (typeof description === "string" && description.length > 0)
         return "product-description";
-      }
       return "no-description";
     },
 
@@ -252,9 +251,8 @@
      * Computes text to be shown for a product's description.
      */
     _computeDescriptionText: function(description) {
-      if (typeof description === "string" && description.length > 0) {
+      if (typeof description === "string" && description.length > 0)
         return description;
-      }
       return "(No description)";
     },
 
@@ -324,14 +322,6 @@
      */
     _hasKnownTestResults: function() {
       return this.tests !== undefined && this.tests !== null && typeof this.tests == "object";
-    },
-
-    /**
-     * Discard the current `zerostate`/uncommitted new item.
-     */
-    _triggerDiscard: function() {
-      var schema = this._schema;
-      bloom.menu.hideAddEntry(schema);
     },
 
     /**
