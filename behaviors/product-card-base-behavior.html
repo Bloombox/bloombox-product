@@ -365,7 +365,26 @@
         } else {
           console.log("Media item uploaded successfully.", uuid);
           that.set("photos", [uuid]);
-          event.target.adoptNewAsset();
+          event.detail.adoptNewAsset();
+        }
+      });
+    },
+
+    /**
+     * Handles events from subcomponents that indicate a media asset has been
+     * unattached from the current object.
+     */
+    handleAssetClear: function(event) {
+      var that = this;
+      console.log("Clearing asset:", event);
+      bloom.menu.clearAsset(event.detail, function (error) {
+        // handle edit success/fail
+        if (error) {
+          console.error("Failed to clear media for item:", that, error);
+          alert("Failed to clear image.");
+        } else {
+          console.log("Media item cleared successfully.");
+          that.set("photos", []);
         }
       });
     },
