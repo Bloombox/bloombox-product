@@ -325,6 +325,21 @@
     },
 
     /**
+     * Process rich testing terpene results, ensuring that rating values are numeric
+     * and `presence` value matches the state of the rating.
+     */
+    _processTerpenes: function(terpenes) {
+      for (i in terpenes) {
+        if (terpenes.hasOwnProperty(i)) {
+          if (terpenes[i].presence === true) {
+            terpenes[i].rating = parseFloat(terpenes[i].rating);
+          }
+        }
+      }
+      return terpenes;
+    },
+
+    /**
      * Perform field validation when in zerostate. Callbacks for `success` and `error`
      * states need to be provided.
      */
