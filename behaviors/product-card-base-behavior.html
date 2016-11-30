@@ -281,6 +281,16 @@
     },
 
     /**
+     * Render a human-readable label for a `species`.
+     */
+    _renderSpeciesLabel: function(species) {
+      if (!species) {
+        return "Unspecified";
+      }
+      return species;
+    },
+
+    /**
      * Render function that prepares a simple label, should a brand be specified for
      * a product, or an empty string if not.
      */
