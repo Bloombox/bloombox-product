@@ -335,6 +335,14 @@
     },
 
     /**
+     * Trim a string for use in underlying persistence - i.e. remove trailing
+     * and preceding spaces, and cleanup bad values.
+     */
+    _trim: function(string) {
+      return string.trim();
+    },
+
+    /**
      * Process rich testing terpene results, ensuring that rating values are numeric
      * and `presence` value matches the state of the rating.
      */
