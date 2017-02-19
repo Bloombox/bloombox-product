@@ -191,6 +191,17 @@
       },
 
       /**
+      * Flag value indicating that this item's inventory is low, and encourages customer
+      * to take advantage of the last chance.
+      */
+      lastchance: {
+        type: Boolean,
+        notify: true,
+        reflectToAttribute: true,
+        value: false
+      },
+
+      /**
        * Boolean flag indicating whether this item is currently visible on the menu.
        */
       visible: {
