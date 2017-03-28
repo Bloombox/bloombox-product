@@ -191,6 +191,17 @@
       },
 
       /**
+       * Flag value indicating that this item is running out soon, and should show a UI hint
+       * to that effect when presented to users.
+       */
+      lastchance: {
+        type: Boolean,
+        notify: true,
+        reflectToAttribute: true,
+        value: false
+      },
+
+      /**
       * Flag value indicating that this item's inventory is low, and encourages customer
       * to take advantage of the last chance.
       */
