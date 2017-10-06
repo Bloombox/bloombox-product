@@ -202,6 +202,16 @@
       },
 
       /**
+       * Flag indicating this product is special/featured.
+       */
+      featured: {
+        type: Boolean,
+        notify: true,
+        reflectToAttribute: true,
+        value: false
+      },
+
+      /**
       * Flag value indicating that this item's inventory is low, and encourages customer
       * to take advantage of the last chance.
       */
